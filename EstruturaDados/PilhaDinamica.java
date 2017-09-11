@@ -46,14 +46,15 @@ public class PilhaDinamica implements TADPilha {
     public boolean isFull() {
         return false;
     }
-
-    public Object resolverExpressao(String s) {
+    
+    //Parte 1 - Resolver uma expressão pós-fixa
+    public Object resolverExpressao(String expressao) {
         TADPilha pilha = new PilhaDinamica();
         Object num1, num2, resultado = 0;
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < expressao.length(); i++) {
             //verificar para qualquer espaço em branco
-            if (s.charAt(i) != ' ') {
-                switch (s.charAt(i)) {
+            if (expressao.charAt(i) != ' ') {
+                switch (expressao.charAt(i)) {
                     case '+':
                         num1 = pilha.pop();
                         num2 = pilha.pop();
@@ -79,11 +80,32 @@ public class PilhaDinamica implements TADPilha {
                         pilha.push(resultado);
                         break;
                     default:
-                        pilha.push(s.charAt(i));
+                        pilha.push(expressao.charAt(i));
                 }
             }
 
         }
         return pilha.pop();
+    }
+    public Object convertePosFixa(String expressao){
+        Object aux="";
+        TADPilha pilha = new PilhaDinamica();
+        Object num1,num2;
+        for( int i=0;i<expressao.length();i++)
+        {
+            if (expressao.charAt(i) == '+' || expressao.charAt(i)=='-' ||
+                expressao.charAt(i) == '*' || expressao.charAt(i)=='/')
+            {
+                num2 = pilha.pop();
+                num1 = pilha.pop();
+                aux = "("+ num1 + ""+ expressao.charAt(i) + num2+")";
+                pilha.push(aux);
+            }
+            else
+            {
+                pilha.push(expressao.charAt(i));
+            }
+         }
+        return aux;
     }
 }

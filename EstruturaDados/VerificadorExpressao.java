@@ -26,15 +26,15 @@ public class VerificadorExpressao {
 	}
 	
 	public static void main(String[] args) {
-		String s = "(7 � (( X * (( X + Y) / ( J � 3)) + Y) / (4 � 2.5)))";
+		String s = "(7 - (( X * (( X + Y) / ( J - 3)) + Y) / (4 - 2.5)))";
 		System.out.println("Verificando " + s);
 		System.out.println(verificarParenteses(s));
 		
-		s = "(7 � (( X * ( X + Y) / ( J � 3)) + Y) / (4 � 2.5)))";
+		s = "(7 - (( X * ( X + Y) / ( J - 3)) + Y) / (4 - 2.5)))";
 		System.out.println("Verificando " + s);
 		System.out.println(verificarParenteses(s));
 		
-		s = "(7 � (( X * (( X + Y) / ( J � 3)) + Y / (4 � 2.5)))";
+		s = "(7 - (( X * (( X + Y) / ( J - 3)) + Y / (4 - 2.5)))";
 		System.out.println("Verificando " + s);
 		System.out.println(verificarParenteses(s));
 		

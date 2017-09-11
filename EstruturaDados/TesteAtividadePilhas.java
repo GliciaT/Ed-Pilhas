@@ -9,9 +9,10 @@ package EstruturaDados;
  *
  * @author Glícia Tigre
  */
-public class TesteResolverExpressao {
+public class TesteAtividadePilhas {
     public static void main (String[] args){
         PilhaDinamica pilha = new PilhaDinamica();
-        System.out.println(pilha.resolverExpressao("45+"));
+        System.out.println(pilha.resolverExpressao("45+7+67*+"));
+        System.out.println(pilha.convertePosFixa("45+7+67*+"));
     }
 }
