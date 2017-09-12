@@ -5,9 +5,14 @@ package EstruturaDados;
  * @author Glícia Tigre e Diego Arruda
  */
 public class TesteAtividadePilhas {
-    public static void main (String[] args){
+
+    public static void main(String[] args) {
         PilhaDinamica pilha = new PilhaDinamica();
-        System.out.println(pilha.resolverExpressao("45+7+67*+"));
-        System.out.println(pilha.convertePosFixa("45+7+67*+"));
+
+        //teste para calcular uma expressão pós fixa
+        System.out.println(pilha.resolverExpressao("45 5 + 7 + 6 7 * +"));
+
+        //teste de conversão de uma expressão pósfixa em infixa
+        System.out.println(pilha.convertePosFixa("45 5 + 7 + 6 7 * +"));
     }
 }
