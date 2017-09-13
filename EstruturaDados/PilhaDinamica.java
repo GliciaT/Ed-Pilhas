@@ -47,68 +47,68 @@ public class PilhaDinamica implements TADPilha {
         return false;
     }
 
-    //Parte 1 - Resolver uma expressão pós-fixa
+    //Parte 1 - Resolver uma expressão pós-fixa (Que contém apenas números
     //A expressão passada deve ter seus números/operadores separados por espaços
     public Float resolverExpressao(String expressao) {
         PilhaDinamica pilha = new PilhaDinamica();
-        Float a, b, resultado, c;
-        String[] format = expressao.split("\\s");
-        for (String format1 : format) {
-            switch (format1) {
-                case "+":
-                    a = (Float) pilha.pop();
-                    b = (Float) pilha.pop();
-                    resultado = a + b;
-                    pilha.push(resultado);
-                    break;
-                case "-":
-                    a = (Float) pilha.pop();
-                    b = (Float) pilha.pop();
-                    resultado = b - a;
-                    pilha.push(resultado);
-                    break;
-                case "*":
-                    a = (Float) pilha.pop();
-                    b = (Float) pilha.pop();
-                    resultado = a * b;
-                    pilha.push(resultado);
-                    break;
-                case "/":
-                    a = (Float) pilha.pop();
-                    b = (Float) pilha.pop();
-                    resultado = b / a;
-                    pilha.push(resultado);
-                    break;
-                default:
-                    c = Float.parseFloat(format1);
-                    pilha.push(c);
-                    break;
+        Float a, b, resultado;
+        if (!expressao.isEmpty()) {
+            String[] format = expressao.split("\\s");
+            for (String format1 : format) {
+                switch (format1) {
+                    case "+":
+                        a = (Float) pilha.pop();
+                        b = (Float) pilha.pop();
+                        resultado = a + b;
+                        pilha.push(resultado);
+                        break;
+                    case "-":
+                        a = (Float) pilha.pop();
+                        b = (Float) pilha.pop();
+                        resultado = b - a;
+                        pilha.push(resultado);
+                        break;
+                    case "*":
+                        a = (Float) pilha.pop();
+                        b = (Float) pilha.pop();
+                        resultado = a * b;
+                        pilha.push(resultado);
+                        break;
+                    case "/":
+                        a = (Float) pilha.pop();
+                        b = (Float) pilha.pop();
+                        resultado = b / a;
+                        pilha.push(resultado);
+                        break;
+                    default:
+                        pilha.push(Float.parseFloat(format1));
+                        break;
+                }
             }
         }
         return (Float) pilha.pop();
     }
 
-    //Parte 2 - Converter uma função pósfixa em uma infixa
+    //Parte 2 - Converter uma função pósfixa em uma infixa (aceitando expressões com variáveis)
     //A expressão passada deve ter seus números/operadores separados por espaços
     public String convertePosFixa(String expressao) {
-        String aux = "";
+        String aux, num1, num2;
         TADPilha pilha = new PilhaDinamica();
-        Object num1, num2, c;
-        String[] format = expressao.split("\\s");
-        //for (int i = 0; i < expressao.length(); i++) {
-        for (int i = 0; i < format.length; i++) {
-            if (format[i].equals("+") || format[i].equals("-")
-                    || format[i].equals("*") || format[i].equals("/")) {
-                num2 = pilha.pop();
-                num1 = pilha.pop();
-                aux = "(" + num1 + "" + format[i] + num2 + ")";
-                pilha.push(aux);
-            } else {
-                c = Float.parseFloat(format[i]);
-                pilha.push(c);
-                //pilha.push(expressao.charAt(i));
+        if (!expressao.isEmpty()) {
+            String[] format = expressao.split("\\s");
+
+            for (String format1 : format) {
+                if (format1.equals("+") || format1.equals("-") || format1.equals("*") || format1.equals("/")) {
+                    num2 = (String) pilha.pop();
+                    num1 = (String) pilha.pop();
+                    aux = "(" + num1 + "" + format1 + num2 + ")";
+                    pilha.push(aux);
+                } else {
+                    pilha.push(format1);
+
+                }
             }
         }
-        return aux;
+        return (String) pilha.pop();
     }
 }
